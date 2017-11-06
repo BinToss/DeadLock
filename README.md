@@ -1,5 +1,6 @@
 # DeadLock
 DeadLock can be used to remove or unlock files and folders that cannot be removed because they're in use by another process.
+This software can also take ownership of files and folders in order to unlock files.
 
 # About
 DeadLock was created by DeadLine. This GitHub repository has been created to allow user to view, edit, improve and share the code behind DeadLock.
@@ -7,7 +8,7 @@ DeadLock was created by DeadLine. This GitHub repository has been created to all
 You can find our company on the web:
 https://codedead.com/
 
-Do not hesitate to contact us if you have a question or if you need support with DeadLock.
+Do not hesitate to [contact us](https://codedead.com/?page_id=145) if you have a question or if you need support with DeadLock.
 
 # Requirements in order to build DeadLock:
 * Turn off 'Prefer 32-bit'
