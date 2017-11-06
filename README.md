@@ -5,7 +5,7 @@ This software can also take ownership of files and folders in order to unlock fi
 # About
 DeadLock was created by DeadLine. This GitHub repository has been created to allow user to view, edit, improve and share the code behind DeadLock.
 
-You can find our company on the web:
+You can find our company on the web:  
 https://codedead.com/
 
 Do not hesitate to [contact us](https://codedead.com/?page_id=145) if you have a question or if you need support with DeadLock.
