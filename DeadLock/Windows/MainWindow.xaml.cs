@@ -28,7 +28,7 @@ namespace DeadLock.Windows
         {
             InitializeComponent();
 
-            _updateManager = new UpdateManager.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "http://codedead.com/Software/DeadLock/update.xml", "DeadLock");
+            _updateManager = new UpdateManager.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/DeadLock/update.xml", "DeadLock");
 
             LoadTheme();
             LoadSettings();
@@ -186,7 +186,7 @@ namespace DeadLock.Windows
         {
             try
             {
-                Process.Start("http://codedead.com/");
+                Process.Start("https://codedead.com/");
             }
             catch (Exception ex)
             {

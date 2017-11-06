@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DeadLock.Classes
+﻿namespace DeadLock.Classes
 {
+    /// <summary>
+    /// This class represents the details of a process or handle that is currently locking another file
+    /// </summary>
     internal sealed class HandleLockerDetails
     {
         public string FileName { get; set; }

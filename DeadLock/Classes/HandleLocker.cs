@@ -6,8 +6,28 @@ using System.Security.Principal;
 
 namespace DeadLock.Classes
 {
+    /// <summary>
+    /// This class represents a file which may or may not be unlocked or taken ownership of
+    /// </summary>
     internal sealed class HandleLocker
     {
+        /// <summary>
+        /// The full path of the file
+        /// </summary>
+        public string ActualPath { get; set; }
+        /// <summary>
+        /// The current status of the file
+        /// </summary>
+        public string Status { get; set; }
+        /// <summary>
+        /// An indicator whether ownership of the file is valid or not
+        /// </summary>
+        public string Ownership { get; set; }
+        /// <summary>
+        /// A list of details concerning the file in question
+        /// </summary>
+        public List<HandleLockerDetails> Details { get; set; }
+
         internal HandleLocker(string path)
         {
             if (!File.Exists(path))
@@ -40,14 +60,7 @@ namespace DeadLock.Classes
             {
                 isWriteAccess = false;
             }
-
             return isWriteAccess;
         }
-
-
-        public string ActualPath { get; set; }
-        public string Status { get; set; }
-        public string Ownership { get; set; }
-        public List<HandleLockerDetails> Details{get; set; }
     }
 }

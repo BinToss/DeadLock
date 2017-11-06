@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using DeadLock.Classes;
 
@@ -33,7 +32,7 @@ namespace DeadLock.Windows
         {
             try
             {
-                Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\gpl.pdf");
+                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\gpl.pdf");
             }
             catch (Exception ex)
             {
@@ -45,7 +44,7 @@ namespace DeadLock.Windows
         {
             try
             {
-                Process.Start("http://codedead.com/");
+                System.Diagnostics.Process.Start("https://codedead.com/");
             }
             catch (Exception ex)
             {
