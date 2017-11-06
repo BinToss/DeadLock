@@ -17,4 +17,4 @@ Do not hesitate to [contact us](https://codedead.com/?page_id=145) if you have a
 * [Visual Studio](https://visualstudio.com)
 
 # License
-DeadLock is licensed under the GPLv3.
+DeadLock is licensed under the [GPLv3](https://www.gnu.org/licenses/quick-guide-gplv3.html).
