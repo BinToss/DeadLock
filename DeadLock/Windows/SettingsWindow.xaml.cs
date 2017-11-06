@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using DeadLock.Classes;
+using DeadLock.Classes.GUI;
 using Microsoft.Win32;
 
 namespace DeadLock.Windows

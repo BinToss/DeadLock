@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using DeadLock.Classes;
+using DeadLock.Classes.GUI;
 
 namespace DeadLock.Windows
 {

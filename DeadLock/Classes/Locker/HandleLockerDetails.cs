@@ -1,4 +1,4 @@
-﻿namespace DeadLock.Classes
+﻿namespace DeadLock.Classes.Locker
 {
     /// <summary>
     /// This class represents the details of a process or handle that is currently locking another file

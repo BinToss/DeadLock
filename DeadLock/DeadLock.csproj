@@ -80,8 +80,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\HandleLocker.cs" />
-    <Compile Include="Classes\HandleLockerDetails.cs" />
+    <Compile Include="Classes\Locker\HandleLocker.cs" />
+    <Compile Include="Classes\Locker\HandleLockerDetails.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -97,7 +97,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\StyleManager.cs" />
+    <Compile Include="Classes\GUI\StyleManager.cs" />
     <Compile Include="Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>

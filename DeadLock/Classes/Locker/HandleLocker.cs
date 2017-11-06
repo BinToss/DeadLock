@@ -4,7 +4,7 @@ using System.IO;
 using System.Security.AccessControl;
 using System.Security.Principal;
 
-namespace DeadLock.Classes
+namespace DeadLock.Classes.Locker
 {
     /// <summary>
     /// This class represents a file which may or may not be unlocked or taken ownership of

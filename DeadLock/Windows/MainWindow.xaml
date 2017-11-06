@@ -162,7 +162,7 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <ListView MinHeight="100" x:Name="LsvFiles" Margin="5" Grid.Row="1">
+        <ListView x:Name="LsvFiles" Margin="5" Grid.Row="1">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Unlock">
@@ -256,20 +256,14 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView MinHeight="100" x:Name="LsvDetails" Margin="5" Grid.Row="2">
+        <ListView x:Name="LsvDetails" Margin="5" Grid.Row="2">
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Properties">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="16" Source="/DeadLock;component/Resources/details.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
                     <MenuItem Header="Open file location">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/DeadLock;component/Resources/file.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <Separator></Separator>
                     <MenuItem Header="Kill">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/DeadLock;component/Resources/delete.png" />
@@ -279,6 +273,11 @@
                     <MenuItem Header="Open in VirusTotal">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/DeadLock;component/Resources/virustotal.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Properties">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/DeadLock;component/Resources/details.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </ContextMenu>
