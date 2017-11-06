@@ -113,6 +113,12 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Tools">
+                <MenuItem Header="FileSystem Watcher">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/DeadLock;component/Resources/watcher.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator></Separator>
                 <MenuItem Header="Properties">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/DeadLock;component/Resources/details.png"></Image>
@@ -244,9 +250,9 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView x:Name="DynGridFile">
-                    <GridViewColumn Header="Path" DisplayMemberBinding="{Binding ActualPath}" Width="Auto" />
-                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="Auto" />
-                    <GridViewColumn Header="Ownership" DisplayMemberBinding="{Binding Ownership}" Width="Auto" />
+                    <GridViewColumn Header="Path" DisplayMemberBinding="{Binding ActualPath}" Width="100" />
+                    <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="100" />
+                    <GridViewColumn Header="Ownership" DisplayMemberBinding="{Binding Ownership}" Width="100" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -285,8 +291,9 @@
             </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView x:Name="DynGridDetails">
-                    <GridViewColumn Header="Path" DisplayMemberBinding="{Binding FilePath}" Width="Auto" />
-                    <GridViewColumn Header="Process ID" DisplayMemberBinding="{Binding ProcessID}" Width="Auto" />
+                    <GridViewColumn Header="File name" DisplayMemberBinding="{Binding FileName}" Width="100" />
+                    <GridViewColumn Header="Path" DisplayMemberBinding="{Binding FilePath}" Width="100" />
+                    <GridViewColumn Header="Process ID" DisplayMemberBinding="{Binding ProcessID}" Width="100" />
                 </GridView>
             </ListView.View>
         </ListView>

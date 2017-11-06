@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CodeDead")]
 [assembly: AssemblyProduct("RegManager")]
-[assembly: AssemblyCopyright("Copyright © CodeDead 2017")]
+[assembly: AssemblyCopyright("Copyright © CodeDead 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

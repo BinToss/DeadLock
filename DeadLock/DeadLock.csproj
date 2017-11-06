@@ -68,7 +68,7 @@
     <Reference Include="UIAutomationProvider" />
     <Reference Include="UIAutomationTypes" />
     <Reference Include="UpdateManager">
-      <HintPath>..\..\..\..\Documents\Visual Studio 2017\Projects\UpdateManager\UpdateManager\bin\Release\UpdateManager.dll</HintPath>
+      <HintPath>..\..\UpdateManager\UpdateManager\bin\Release\UpdateManager.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -199,6 +199,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\website.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\watcher.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

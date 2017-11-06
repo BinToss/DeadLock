@@ -14,6 +14,7 @@ using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace DeadLock.Windows
 {
+    /// <inheritdoc cref="Syncfusion.Windows.Shared.ChromelessWindow" />
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>

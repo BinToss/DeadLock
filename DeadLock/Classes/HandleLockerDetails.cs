@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DeadLock.Classes
 {
-    internal class HandleLockerDetails
+    internal sealed class HandleLockerDetails
     {
+        public string FileName { get; set; }
         public string FilePath { get; set; }
-        // ReSharper disable once InconsistentNaming
-        public string ProcessID { get; set; }
+        public string ProcessId { get; set; }
     }
 }

@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     TitleTextAlignment="Center"
     AllowsTransparency="True"
-    Title="DeadLock - Settings" Height="250" Width="300" WindowStartupLocation="CenterScreen" Icon="/DeadLock;component/dlicon.ico">
+    Title="DeadLock - Settings" Height="250" Width="400" WindowStartupLocation="CenterScreen" Icon="/DeadLock;component/dlicon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>

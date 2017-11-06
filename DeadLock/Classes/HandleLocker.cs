@@ -6,7 +6,7 @@ using System.Security.Principal;
 
 namespace DeadLock.Classes
 {
-    internal class HandleLocker
+    internal sealed class HandleLocker
     {
         internal HandleLocker(string path)
         {
