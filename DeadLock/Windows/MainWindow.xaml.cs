@@ -255,12 +255,17 @@ namespace DeadLock.Windows
         private void OpenFolderMenuItem_Click(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
-            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (fbd.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
+            try
             {
                 foreach (string s in Directory.GetFiles(fbd.SelectedPath, "*.*", SearchOption.AllDirectories))
                 {
                     AddFile(s);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open all files in the directory! Please make sure that you have the appropriate rights to access this folder.", "DeadLock", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

@@ -75,10 +75,12 @@ namespace RegManager
             {
                 Registry.ClassesRoot.CreateSubKey(@"*\shell\DeadLock", true);
                 Registry.ClassesRoot.CreateSubKey(@"*\shell\DeadLock\command", true);
+                Registry.SetValue(@"HKEY_CLASSES_ROOT\*\shell\DeadLock\", "Icon", path + ",0");
                 Registry.SetValue(@"HKEY_CLASSES_ROOT\*\shell\DeadLock\command", "", path + " %1");
 
                 Registry.ClassesRoot.CreateSubKey(@"Directory\shell\DeadLock", true);
                 Registry.ClassesRoot.CreateSubKey(@"Directory\shell\DeadLock\command", true);
+                Registry.SetValue(@"HKEY_CLASSES_ROOT\Directory\shell\DeadLock\", "Icon", path + ",0");
                 Registry.SetValue(@"HKEY_CLASSES_ROOT\Directory\shell\DeadLock\command", "", path + " %1");
             }
             else
