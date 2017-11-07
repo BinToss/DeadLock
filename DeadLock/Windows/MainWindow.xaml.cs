@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -23,6 +25,8 @@ namespace DeadLock.Windows
     {
         #region Variables
         private readonly UpdateManager.UpdateManager _updateManager;
+        private readonly ObservableCollection<HandleLocker> _pathList;
+        private readonly ObservableCollection<HandleLockerDetail> _detailList;
         #endregion
 
         public MainWindow()
@@ -30,12 +34,18 @@ namespace DeadLock.Windows
             InitializeComponent();
 
             _updateManager = new UpdateManager.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/DeadLock/update.xml", "DeadLock");
+            _pathList = new ObservableCollection<HandleLocker>();
+            _detailList = new ObservableCollection<HandleLockerDetail>();
+
+            LsvFiles.ItemsSource = _pathList;
+            LsvDetails.ItemsSource = _detailList;
 
             LoadTheme();
             LoadSettings();
             LoadArguments();
 
             LblVersion.Content += Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
         }
 
         /// <summary>
@@ -231,7 +241,7 @@ namespace DeadLock.Windows
                 try
                 {
                     HandleLocker hl = new HandleLocker(path);
-                    LsvFiles.Items.Add(hl);
+                    _pathList.Add(hl);
                 }
                 catch (FileNotFoundException ex)
                 {
@@ -264,9 +274,22 @@ namespace DeadLock.Windows
                     AddFile(s);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Unable to open all files in the directory! Please make sure that you have the appropriate rights to access this folder.", "DeadLock", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async void LsvFiles_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (!(((FrameworkElement) e.OriginalSource).DataContext is HandleLocker item)) return;
+            item.HasOwnership();
+
+            List<HandleLockerDetail> details = await item.GetHandleLockers();
+            _detailList.Clear();
+            foreach (HandleLockerDetail detail in details)
+            {
+                _detailList.Add(detail);
             }
         }
     }

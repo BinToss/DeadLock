@@ -162,7 +162,7 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <ListView x:Name="LsvFiles" Margin="5" Grid.Row="1">
+        <ListView x:Name="LsvFiles" Margin="5" Grid.Row="1" MouseDoubleClick="LsvFiles_MouseDoubleClick">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Unlock">
@@ -292,7 +292,7 @@
                 <GridView x:Name="DynGridDetails">
                     <GridViewColumn Header="File name" DisplayMemberBinding="{Binding FileName}" Width="100" />
                     <GridViewColumn Header="Path" DisplayMemberBinding="{Binding FilePath}" Width="100" />
-                    <GridViewColumn Header="Process ID" DisplayMemberBinding="{Binding ProcessID}" Width="100" />
+                    <GridViewColumn Header="Process ID" DisplayMemberBinding="{Binding ProcessId}" Width="100" />
                 </GridView>
             </ListView.View>
         </ListView>
