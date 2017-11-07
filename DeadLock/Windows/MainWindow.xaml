@@ -14,8 +14,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Menu>
@@ -156,6 +156,11 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator></Separator>
+                <MenuItem Header="Donate" Click="DonateMenuItem_OnClick">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/DeadLock;component/Resources/money.png"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem Header="About" Click="AboutMenuItem_Click">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/DeadLock;component/Resources/about.png"></Image>
