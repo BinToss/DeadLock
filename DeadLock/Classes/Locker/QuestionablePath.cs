@@ -14,7 +14,7 @@ namespace DeadLock.Classes.Locker
 {
     /// <inheritdoc />
     /// <summary>
-    /// This class represents a file including details such as ownership and lock status
+    /// This class represents a folder or file path including details such as ownership and lock status
     /// </summary>
     internal sealed class QuestionablePath : INotifyPropertyChanged
     {
@@ -26,7 +26,7 @@ namespace DeadLock.Classes.Locker
 
         private string _actualPath;
         /// <summary>
-        /// The full path of the file
+        /// The full path of the file or folder
         /// </summary>
         public string ActualPath
         {
@@ -41,7 +41,7 @@ namespace DeadLock.Classes.Locker
 
         private string _status;
         /// <summary>
-        /// The current status of the file
+        /// The current status of the file or folder
         /// </summary>
         public string Status
         {
@@ -56,7 +56,7 @@ namespace DeadLock.Classes.Locker
 
         private string _ownership;
         /// <summary>
-        /// An indicator whether ownership of the file is valid or not
+        /// An indicator whether ownership of the file or folder is valid or not
         /// </summary>
         public string Ownership
         {
@@ -88,12 +88,12 @@ namespace DeadLock.Classes.Locker
         /// <summary>
         /// Initialize a new HandeLocker
         /// </summary>
-        /// <param name="path">The path of the file</param>
+        /// <param name="path">The path of the file or folder</param>
         internal QuestionablePath(string path)
         {
-            if (!File.Exists(path))
+            if (!File.Exists(path) && !Directory.Exists(path))
             {
-                throw new FileNotFoundException("File does not exist!", path);
+                throw new Exception("Path does not exist: " + path);
             }
             ActualPath = path;
             Status = "Unknown";

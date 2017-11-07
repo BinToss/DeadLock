@@ -56,7 +56,7 @@ namespace DeadLock.Windows
             string[] args = Environment.GetCommandLineArgs();
             for (int i = 1; i < args.Length; i++)
             {
-                AddFile(args[i]);
+                AddPath(args[i]);
             }
         }
 
@@ -141,7 +141,7 @@ namespace DeadLock.Windows
             if (ofd.ShowDialog() != true) return;
             foreach (string s in ofd.FileNames)
             {
-                AddFile(s);
+                AddPath(s);
             }
         }
 
@@ -223,10 +223,10 @@ namespace DeadLock.Windows
         }
 
         /// <summary>
-        /// Add a file to the GUI
+        /// Add a file or folder to the GUI
         /// </summary>
-        /// <param name="path">The path of the file that should be added to the GUI</param>
-        private void AddFile(string path)
+        /// <param name="path">The path of the file or folder that should be added to the GUI</param>
+        private void AddPath(string path)
         {
             bool already = false;
             foreach (QuestionablePath hl in LsvFiles.Items)
@@ -243,7 +243,7 @@ namespace DeadLock.Windows
                     QuestionablePath hl = new QuestionablePath(path);
                     _pathList.Add(hl);
                 }
-                catch (FileNotFoundException ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "DeadLock", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
@@ -259,7 +259,7 @@ namespace DeadLock.Windows
 
             foreach (string s in files)
             {
-                AddFile(s);
+                AddPath(s);
             }
         }
 
@@ -271,7 +271,7 @@ namespace DeadLock.Windows
             {
                 foreach (string s in Directory.GetFiles(fbd.SelectedPath, "*.*", SearchOption.AllDirectories))
                 {
-                    AddFile(s);
+                    AddPath(s);
                 }
             }
             catch (Exception)
