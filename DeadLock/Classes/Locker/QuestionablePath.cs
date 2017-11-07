@@ -196,7 +196,7 @@ namespace DeadLock.Classes.Locker
                 try
                 {
                     if (IsCancelled) throw new OperationCanceledException();
-                    lockers.AddRange(NativeMethods.FindLockingProcesses(ActualPath).Select(p => new HandleLocker(p)));
+                    lockers.AddRange(NativeMethods.FindLockingProcesses(ActualPath).Select(p => new HandleLocker(p, ActualPath)));
                 }
                 catch (OperationCanceledException)
                 {
@@ -241,7 +241,7 @@ namespace DeadLock.Classes.Locker
                             }
                             if (add)
                             {
-                                lockers.Add(new HandleLocker(p));
+                                lockers.Add(new HandleLocker(p, path));
                             }
                         }
                     }

@@ -49,6 +49,21 @@ namespace DeadLock.Classes.Locker
             }
         }
 
+        private string _lockedPath;
+        /// <summary>
+        /// The path to the handle that is currently being locked
+        /// </summary>
+        public string LockedPath
+        {
+            get => _lockedPath;
+            set
+            {
+                if (value == _lockedPath) return;
+                _lockedPath = value;
+                OnPropertyChanged();
+            }
+        }
+
         private int _processId;
         /// <summary>
         /// The process ID of the Process that is locking a file or folder
@@ -73,12 +88,13 @@ namespace DeadLock.Classes.Locker
         /// Initialize a new HandleLocker
         /// </summary>
         /// <param name="p">The Process that is locking a file or folder</param>
-        internal HandleLocker(Process p)
+        /// <param name="lockedPath">The path to the handle that is currently being locked</param>
+        internal HandleLocker(Process p, string lockedPath)
         {
             _process = p;
-
-            FilePath = (GetMainModuleFilepath(p.Id));
-            FileName = (Path.GetFileName(_filePath));
+            FilePath = GetMainModuleFilepath(p.Id);
+            FileName = Path.GetFileName(FilePath);
+            LockedPath = lockedPath;
             ProcessId = p.Id;
         }
 

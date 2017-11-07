@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Principal;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using DeadLock.Classes.GUI;
 using DeadLock.Classes.Locker;
@@ -27,6 +28,7 @@ namespace DeadLock.Windows
         private readonly UpdateManager.UpdateManager _updateManager;
         private readonly ObservableCollection<QuestionablePath> _pathList;
         private readonly ObservableCollection<HandleLocker> _detailList;
+        private readonly DataTemplate _defaultColumnTemplate;
         #endregion
 
         public MainWindow()
@@ -36,6 +38,7 @@ namespace DeadLock.Windows
             _updateManager = new UpdateManager.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/DeadLock/update.xml", "DeadLock");
             _pathList = new ObservableCollection<QuestionablePath>();
             _detailList = new ObservableCollection<HandleLocker>();
+            _defaultColumnTemplate = GvcLockedPath.CellTemplate;
 
             LsvFiles.ItemsSource = _pathList;
             LsvDetails.ItemsSource = _detailList;
@@ -148,9 +151,8 @@ namespace DeadLock.Windows
         private void DetailsItem_CheckedChanged(object sender, RoutedEventArgs e)
         {
             if (LsvDetails == null) return;
-
             LsvDetails.Visibility = MniDetails.IsChecked ? Visibility.Visible : Visibility.Collapsed;
-            SizeToContent = SizeToContent.WidthAndHeight;
+            //SizeToContent = SizeToContent.WidthAndHeight;
         }
 
         private void RefreshMenuItem_Click(object sender, RoutedEventArgs e)
@@ -291,6 +293,12 @@ namespace DeadLock.Windows
             {
                 _detailList.Add(detail);
             }
+        }
+
+        private void MniLockedPath_CheckChanged(object sender, RoutedEventArgs e)
+        {
+            if (GvcLockedPath == null) return;
+            GvcLockedPath.Width = MniLockedPath.IsChecked ? 100 : 0;
         }
     }
 }

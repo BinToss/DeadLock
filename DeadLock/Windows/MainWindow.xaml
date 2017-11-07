@@ -105,6 +105,7 @@
             </MenuItem>
             <MenuItem Header="View">
                 <MenuItem x:Name="MniDetails" Header="Details" Checked="DetailsItem_CheckedChanged" Unchecked="DetailsItem_CheckedChanged" IsChecked="True" IsCheckable="True"></MenuItem>
+                <MenuItem x:Name="MniLockedPath" Header="Locked path" Checked="MniLockedPath_CheckChanged" Unchecked="MniLockedPath_CheckChanged" IsChecked="True" IsCheckable="True"></MenuItem>
                 <Separator></Separator>
                 <MenuItem Header="Refresh" Click="RefreshMenuItem_Click">
                     <MenuItem.Icon>
@@ -292,6 +293,7 @@
                 <GridView x:Name="DynGridDetails">
                     <GridViewColumn Header="File name" DisplayMemberBinding="{Binding FileName}" Width="100" />
                     <GridViewColumn Header="Path" DisplayMemberBinding="{Binding FilePath}" Width="100" />
+                    <GridViewColumn x:Name="GvcLockedPath" Header="Locked path" DisplayMemberBinding="{Binding LockedPath}" Width="100" />
                     <GridViewColumn Header="Process ID" DisplayMemberBinding="{Binding ProcessId}" Width="100" />
                 </GridView>
             </ListView.View>
