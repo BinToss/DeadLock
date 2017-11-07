@@ -81,8 +81,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Locker\QuestionablePath.cs" />
     <Compile Include="Classes\Locker\HandleLocker.cs" />
-    <Compile Include="Classes\Locker\HandleLockerDetail.cs" />
     <Compile Include="Classes\Native\NativeMethods.cs" />
     <Compile Include="Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>

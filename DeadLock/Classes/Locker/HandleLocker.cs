@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Management;
 using System.Runtime.CompilerServices;
-using System.Security.AccessControl;
-using System.Security.Principal;
-using System.Threading.Tasks;
-using DeadLock.Classes.Native;
 
 namespace DeadLock.Classes.Locker
 {
     /// <inheritdoc />
     /// <summary>
-    /// This class represents a file including details such as ownership and lock status
+    /// This class represents the details of a process or handle that is currently locking another file
     /// </summary>
     internal sealed class HandleLocker : INotifyPropertyChanged
     {
@@ -24,242 +19,109 @@ namespace DeadLock.Classes.Locker
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string _actualPath;
+        private string _fileName;
         /// <summary>
-        /// The full path of the file
+        /// The name of the file that is locking a file or folder including the extension
         /// </summary>
-        public string ActualPath
+        public string FileName
         {
-            get => _actualPath;
+            get => _fileName;
             set
             {
-                if (value == ActualPath) return;
-                _actualPath = value;
+                if (value == _fileName) return;
+                _fileName = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _status;
+        private string _filePath;
         /// <summary>
-        /// The current status of the file
+        /// The full path of the file that is locking a file or folder
         /// </summary>
-        public string Status
+        public string FilePath
         {
-            get => _status;
+            get => _filePath;
             set
             {
-                if (value == _status) return;
-                _status = value;
+                if (value == _filePath) return;
+                _filePath = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _ownership;
+        private int _processId;
         /// <summary>
-        /// An indicator whether ownership of the file is valid or not
+        /// The process ID of the Process that is locking a file or folder
         /// </summary>
-        public string Ownership
+        public int ProcessId
         {
-            get => _ownership;
+            get => _processId;
             set
             {
-                if (value == _ownership) return;
-                _ownership = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private bool _isCancelled;
-
-        /// <summary>
-        /// A boolean indicating whether the operation is cancelled or not
-        /// </summary>
-        public bool IsCancelled
-        {
-            get => _isCancelled;
-            set
-            {
-                if (value == _isCancelled) return;
-                _isCancelled = value;
+                if (value == _processId) return;
+                _processId = value;
                 OnPropertyChanged();
             }
         }
 
         /// <summary>
-        /// Initialize a new HandeLocker
+        /// The Process that is locking a file or folder
         /// </summary>
-        /// <param name="path">The path of the file</param>
-        internal HandleLocker(string path)
+        private readonly Process _process;
+
+        /// <summary>
+        /// Initialize a new HandleLocker
+        /// </summary>
+        /// <param name="p">The Process that is locking a file or folder</param>
+        internal HandleLocker(Process p)
         {
-            if (!File.Exists(path))
-            {
-                throw new FileNotFoundException("File does not exist!", path);
-            }
-            ActualPath = path;
-            Status = "Unknown";
-            Ownership = "Unknown";
-            IsCancelled = false;
+            _process = p;
+
+            FilePath = (GetMainModuleFilepath(p.Id));
+            FileName = (Path.GetFileName(_filePath));
+            ProcessId = p.Id;
         }
 
         /// <summary>
-        /// Check whether or not the operator has ownership rights to the file or folder that is associated with the HandleLocker
+        /// Get the Process that is locking a file or folder
         /// </summary>
-        internal void HasOwnership()
+        /// <returns>The Process that is locking a file or folder</returns>
+        internal Process GetProcess()
         {
-            bool isWriteAccess = false;
+            return _process;
+        }
+
+        /// <summary>
+        /// Get the file path of the Process that is associated with the HandleLocker. Warning: Might require a lot of system resources
+        /// </summary>
+        /// <param name="processId">The process ID of the Process that is associated with the HandleLocker</param>
+        /// <returns>The file path that is associated with the Process of the HandleLocker</returns>
+        private static string GetMainModuleFilepath(int processId)
+        {
+            string filepath = "";
             try
             {
-                AuthorizationRuleCollection collection = Directory.GetAccessControl(ActualPath).GetAccessRules(true, true, typeof(NTAccount));
-                if (collection.Cast<FileSystemAccessRule>().Any(rule => rule.AccessControlType == AccessControlType.Allow))
+                string wmiQueryString = "SELECT ProcessId, ExecutablePath FROM Win32_Process WHERE ProcessId = " + processId;
+                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(wmiQueryString))
                 {
-                    isWriteAccess = true;
-                }
-            }
-            catch (Exception)
-            {
-                isWriteAccess = false;
-            }
-
-            Ownership = isWriteAccess ? "True" : "False";
-        }
-
-        /// <summary>
-        /// Get a list of files inside a folder that are accessible to the operator
-        /// </summary>
-        /// <param name="rootPath">The root path of the folder</param>
-        /// <param name="patternMatch">The pattern that should be used to find the files</param>
-        /// <param name="searchOption">The SearchOption that should be used to find the files</param>
-        /// <returns>A list of files inside a folder that are accessible to the operator</returns>
-        private static IEnumerable<string> GetDirectoryFiles(string rootPath, string patternMatch, SearchOption searchOption)
-        {
-            List<string> foundFiles = new List<string>();
-
-            if (searchOption == SearchOption.AllDirectories)
-            {
-                try
-                {
-                    IEnumerable<string> subDirs = Directory.EnumerateDirectories(rootPath);
-                    foundFiles = subDirs.Aggregate(foundFiles, (current, dir) => current.Concat(GetDirectoryFiles(dir, patternMatch, searchOption)).ToList());
-                }
-                catch (UnauthorizedAccessException) { }
-                catch (PathTooLongException) { }
-            }
-
-            try
-            {
-                foundFiles = foundFiles.Concat(Directory.EnumerateFiles(rootPath, patternMatch)).ToList(); // Add files from the current directory
-            }
-            catch (UnauthorizedAccessException)
-            {
-                
-            }
-            return foundFiles;
-        }
-
-        /// <summary>
-        /// Retrieve the handles that are locking the file or folder
-        /// </summary>
-        /// <returns>A list of handles that are currently locking the file or folder</returns>
-        internal async Task<List<HandleLockerDetail>> GetHandleLockers()
-        {
-            List<HandleLockerDetail> handleLockers;
-            if (File.GetAttributes(ActualPath).HasFlag(FileAttributes.Directory))
-            {
-                handleLockers = await GetDirectoryLockers();
-            }
-            else
-            {
-                handleLockers = await GetFileLockers();
-            }
-
-            if (handleLockers == null || handleLockers.Count == 0)
-            {
-                Status = "Unlocked";
-            }
-            else
-            {
-                Status = "Locked";
-            }
-
-            return handleLockers;
-        }
-
-        /// <summary>
-        /// Get a list of processes that are locking a file
-        /// </summary>
-        /// <returns>A list of processes that are blocking a file</returns>
-        private async Task<List<HandleLockerDetail>> GetFileLockers()
-        {
-            List<HandleLockerDetail> lockers = new List<HandleLockerDetail>();
-            await Task.Run(() =>
-            {
-                try
-                {
-                    if (IsCancelled) throw new OperationCanceledException();
-                    lockers.AddRange(NativeMethods.FindLockingProcesses(ActualPath).Select(p => new HandleLockerDetail(p)));
-                }
-                catch (OperationCanceledException)
-                {
-                }
-                catch (UnauthorizedAccessException)
-                {
-                }
-            });
-            return lockers;
-        }
-
-        /// <summary>
-        /// Get a list of processes that are locking a directory
-        /// </summary>
-        /// <returns>A list of processes that are locking a directory</returns>
-        private async Task<List<HandleLockerDetail>> GetDirectoryLockers()
-        {
-            List<HandleLockerDetail> lockers = new List<HandleLockerDetail>();
-            await Task.Run(() =>
-            {
-                try
-                {
-                    foreach (string path in GetDirectoryFiles(ActualPath, "*.*", SearchOption.AllDirectories))
+                    using (ManagementObjectCollection results = searcher.Get())
                     {
-                        foreach (Process p in NativeMethods.FindLockingProcesses(path))
+                        ManagementObject mo = results.Cast<ManagementObject>().FirstOrDefault();
+                        if (mo != null)
                         {
-                            bool add = true;
-                            foreach (HandleLockerDetail l in lockers)
-                            {
-                                if (IsCancelled) throw new OperationCanceledException();
-                                try
-                                {
-                                    if (l.ProcessId == p.Id)
-                                    {
-                                        add = false;
-                                    }
-                                }
-                                catch (Win32Exception)
-                                {
-                                    add = false;
-                                }
-                            }
-                            if (add)
-                            {
-                                lockers.Add(new HandleLockerDetail(p));
-                            }
+                            filepath = (string)mo["ExecutablePath"];
                         }
                     }
                 }
-                catch (OperationCanceledException)
-                {
-                }
-                catch (UnauthorizedAccessException)
-                {
-                }
-            });
-            return lockers;
+            }
+            catch (Win32Exception) { }
+            return filepath;
         }
 
         /// <summary>
-        /// Call this method when a property has changed
+        /// The method that will be called when a property has changed
         /// </summary>
-        /// <param name="propertyName">The property that has changed</param>
+        /// <param name="propertyName">The name of the property that has changed</param>
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

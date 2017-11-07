@@ -25,8 +25,8 @@ namespace DeadLock.Windows
     {
         #region Variables
         private readonly UpdateManager.UpdateManager _updateManager;
-        private readonly ObservableCollection<HandleLocker> _pathList;
-        private readonly ObservableCollection<HandleLockerDetail> _detailList;
+        private readonly ObservableCollection<QuestionablePath> _pathList;
+        private readonly ObservableCollection<HandleLocker> _detailList;
         #endregion
 
         public MainWindow()
@@ -34,8 +34,8 @@ namespace DeadLock.Windows
             InitializeComponent();
 
             _updateManager = new UpdateManager.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/DeadLock/update.xml", "DeadLock");
-            _pathList = new ObservableCollection<HandleLocker>();
-            _detailList = new ObservableCollection<HandleLockerDetail>();
+            _pathList = new ObservableCollection<QuestionablePath>();
+            _detailList = new ObservableCollection<HandleLocker>();
 
             LsvFiles.ItemsSource = _pathList;
             LsvDetails.ItemsSource = _detailList;
@@ -229,7 +229,7 @@ namespace DeadLock.Windows
         private void AddFile(string path)
         {
             bool already = false;
-            foreach (HandleLocker hl in LsvFiles.Items)
+            foreach (QuestionablePath hl in LsvFiles.Items)
             {
                 if (hl.ActualPath != path) continue;
                 already = true;
@@ -240,7 +240,7 @@ namespace DeadLock.Windows
             {
                 try
                 {
-                    HandleLocker hl = new HandleLocker(path);
+                    QuestionablePath hl = new QuestionablePath(path);
                     _pathList.Add(hl);
                 }
                 catch (FileNotFoundException ex)
@@ -282,12 +282,12 @@ namespace DeadLock.Windows
 
         private async void LsvFiles_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (!(((FrameworkElement) e.OriginalSource).DataContext is HandleLocker item)) return;
+            if (!(((FrameworkElement) e.OriginalSource).DataContext is QuestionablePath item)) return;
             item.HasOwnership();
 
-            List<HandleLockerDetail> details = await item.GetHandleLockers();
+            List<HandleLocker> details = await item.GetHandleLockers();
             _detailList.Clear();
-            foreach (HandleLockerDetail detail in details)
+            foreach (HandleLocker detail in details)
             {
                 _detailList.Add(detail);
             }
