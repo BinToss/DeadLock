@@ -106,6 +106,7 @@ namespace DeadLock.Windows
             {
                 AllowDrop = Properties.Settings.Default.AllowDragDrop;
                 MniDetails.IsChecked = Properties.Settings.Default.ShowDetails;
+                MniLockedPath.IsChecked = Properties.Settings.Default.LockedPath;
             }
             catch (Exception ex)
             {

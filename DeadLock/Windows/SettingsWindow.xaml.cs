@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
-using DeadLock.Classes;
 using DeadLock.Classes.GUI;
 using Microsoft.Win32;
 
 namespace DeadLock.Windows
 {
+    /// <inheritdoc cref="Syncfusion.Windows.Shared.ChromelessWindow" />
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
     /// </summary>
@@ -84,6 +84,7 @@ namespace DeadLock.Windows
                 ChbStartMinimized.IsChecked = Properties.Settings.Default.StartMinimized;
                 ChbDragDrop.IsChecked = Properties.Settings.Default.AllowDragDrop;
                 ChbShowDetails.IsChecked = Properties.Settings.Default.ShowDetails;
+                ChbLockedPath.IsChecked = Properties.Settings.Default.LockedPath;
 
                 CboStyle.SelectedValue = Properties.Settings.Default.VisualStyle;
                 CpMetroBrush.Color = Properties.Settings.Default.MetroColor;
@@ -147,6 +148,7 @@ namespace DeadLock.Windows
                 if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.StartMinimized = (bool)ChbStartMinimized.IsChecked;
                 if (ChbDragDrop.IsChecked != null) Properties.Settings.Default.AllowDragDrop = (bool) ChbDragDrop.IsChecked;
                 if (ChbShowDetails.IsChecked != null) Properties.Settings.Default.ShowDetails = (bool)ChbShowDetails.IsChecked;
+                if (ChbLockedPath.IsChecked != null) Properties.Settings.Default.LockedPath = (bool) ChbLockedPath.IsChecked;
 
                 Properties.Settings.Default.VisualStyle = (string)CboStyle.SelectedValue;
                 Properties.Settings.Default.MetroColor = CpMetroBrush.Color;

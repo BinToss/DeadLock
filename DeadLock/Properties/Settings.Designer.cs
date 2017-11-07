@@ -130,5 +130,17 @@ namespace DeadLock.Properties {
                 this["AllowDragDrop"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LockedPath {
+            get {
+                return ((bool)(this["LockedPath"]));
+            }
+            set {
+                this["LockedPath"] = value;
+            }
+        }
     }
 }

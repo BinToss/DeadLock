@@ -262,7 +262,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="LsvDetails" Margin="5" Grid.Row="2">
+        <ListView x:Name="LsvDetails" Margin="5" Grid.Row="2" MinHeight="100" MaxHeight="200">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Open file location">

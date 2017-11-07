@@ -23,12 +23,14 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <CheckBox x:Name="ChbAutoUpdate" Content="Automatically check for updates"></CheckBox>
                     <CheckBox x:Name="ChbAdminWarning" Grid.Row="1" Content="Show administrator warning"></CheckBox>
                     <CheckBox x:Name="ChbStartMinimized" Grid.Row="2" Content="Start minimized"></CheckBox>
                     <CheckBox x:Name="ChbDragDrop" Grid.Row="3" Content="Allow drag and drop"></CheckBox>
                     <CheckBox x:Name="ChbShowDetails" Grid.Row="4" Content="Show details"></CheckBox>
+                    <CheckBox x:Name="ChbLockedPath" Grid.Row="5" Content="Show locked path"></CheckBox>
                 </Grid>
             </syncfusion:TabItemExt>
             <syncfusion:TabItemExt Header="Theme">
