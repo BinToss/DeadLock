@@ -203,9 +203,6 @@
     <Resource Include="Resources\website.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\watcher.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\money.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

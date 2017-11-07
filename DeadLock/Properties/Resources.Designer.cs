@@ -253,16 +253,6 @@ namespace DeadLock.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap watcher {
-            get {
-                object obj = ResourceManager.GetObject("watcher", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap website {
             get {
                 object obj = ResourceManager.GetObject("website", resourceCulture);
