@@ -230,7 +230,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator></Separator>
-                    <MenuItem Header="Open in VirusTotal">
+                    <MenuItem Header="Open in VirusTotal" Click="FileVirusTotalMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/DeadLock;component/Resources/virustotal.png" />
                         </MenuItem.Icon>

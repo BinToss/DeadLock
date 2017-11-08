@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Forms;
 using DeadLock.Classes.GUI;
 using DeadLock.Classes.Locker;
+using DeadLock.Classes.Utils;
 using Application = System.Windows.Application;
 using DataFormats = System.Windows.DataFormats;
 using DragEventArgs = System.Windows.DragEventArgs;
@@ -304,6 +305,26 @@ namespace DeadLock.Windows
             try
             {
                 Process.Start("https://codedead.com/?page_id=302");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "DeadLock", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private async void FileVirusTotalMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            QuestionablePath selectedPath = (QuestionablePath)LsvFiles.SelectedItem;
+            if (selectedPath == null) return;
+            if (!File.Exists(selectedPath.ActualPath)) return;
+
+            try
+            {
+                string sha256 = await HashCalculator.GetSha256FromFile(selectedPath.ActualPath);
+                if (!string.IsNullOrEmpty(sha256))
+                {
+                    Process.Start("https://virustotal.com/#/file/" + sha256);
+                }
             }
             catch (Exception ex)
             {
