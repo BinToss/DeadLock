@@ -312,19 +312,29 @@ namespace DeadLock.Windows
             }
         }
 
-        private async void FileVirusTotalMenuItem_OnClick(object sender, RoutedEventArgs e)
+        private void FileVirusTotalMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             QuestionablePath selectedPath = (QuestionablePath)LsvFiles.SelectedItem;
             if (selectedPath == null) return;
-            if (!File.Exists(selectedPath.ActualPath)) return;
 
             try
             {
-                string sha256 = await HashCalculator.GetSha256FromFile(selectedPath.ActualPath);
-                if (!string.IsNullOrEmpty(sha256))
-                {
-                    Process.Start("https://virustotal.com/#/file/" + sha256);
-                }
+                VirusTotal.OpenInVirusTotal(selectedPath.ActualPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "DeadLock", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DetailVirusTotalMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            HandleLocker selectedPath = (HandleLocker)LsvDetails.SelectedItem;
+            if (selectedPath == null) return;
+
+            try
+            {
+                VirusTotal.OpenInVirusTotal(selectedPath.FilePath);
             }
             catch (Exception ex)
             {
