@@ -108,7 +108,7 @@ namespace DeadLock.Classes.Locker
         }
 
         /// <summary>
-        /// Get the file path of the Process that is associated with the HandleLocker. Warning: Might require a lot of system resources
+        /// Get the file path of the Process that is associated with the HandleLocker. This function might require a lot of system resources
         /// </summary>
         /// <param name="processId">The process ID of the Process that is associated with the HandleLocker</param>
         /// <returns>The file path that is associated with the Process of the HandleLocker</returns>

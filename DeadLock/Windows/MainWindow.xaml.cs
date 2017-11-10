@@ -282,17 +282,26 @@ namespace DeadLock.Windows
             }
         }
 
-        private async void LsvFiles_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        /// <summary>
+        /// Retrieve the details of a QuestionablePath such as its list of HandleLocker objects
+        /// </summary>
+        /// <param name="questionablePath">The QuestionablePath object which needs to be examined</param>
+        private async void OpenDetails(QuestionablePath questionablePath)
         {
-            if (!(((FrameworkElement)e.OriginalSource).DataContext is QuestionablePath item)) return;
-            item.HasOwnership();
-
-            List<HandleLocker> details = await item.GetHandleLockers();
+            List<HandleLocker> details = await questionablePath.GetHandleLockers();
             _detailList.Clear();
             foreach (HandleLocker detail in details)
             {
                 _detailList.Add(detail);
             }
+        }
+
+        private void LsvFiles_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (!(((FrameworkElement)e.OriginalSource).DataContext is QuestionablePath item)) return;
+            item.HasOwnership();
+
+            OpenDetails(item);
         }
 
         private void MniLockedPath_CheckChanged(object sender, RoutedEventArgs e)
@@ -371,6 +380,14 @@ namespace DeadLock.Windows
             {
                 MessageBox.Show(ex.Message, "DeadLock", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void FileDetailsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (LsvFiles.SelectedItem == null) return;
+            QuestionablePath qp = (QuestionablePath) LsvFiles.SelectedItem;
+
+            OpenDetails(qp);
         }
     }
 }

@@ -9,7 +9,7 @@
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
     AllowsTransparency="True"
-    Title="DeadLock - About" Height="200" Width="300" WindowStartupLocation="CenterScreen" Icon="/DeadLock;component/dlicon.ico">
+    Title="DeadLock - About" Height="200" Width="350" WindowStartupLocation="CenterScreen" Icon="/DeadLock;component/dlicon.ico">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Image Width="64" Height="64" Source="/DeadLock;component/Resources/deadlock.png"/>
-            <Separator Margin="5"  Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+            <Separator Margin="5,0"  Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
             <TextBlock Grid.Column="2">
 DeadLock was created by DeadLine.<LineBreak></LineBreak>
 <LineBreak></LineBreak>

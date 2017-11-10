@@ -208,7 +208,7 @@
                         </MenuItem>
                     </MenuItem>
                     <Separator></Separator>
-                    <MenuItem Header="Details">
+                    <MenuItem Header="Details" Click="FileDetailsMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/DeadLock;component/Resources/details.png" />
                         </MenuItem.Icon>
