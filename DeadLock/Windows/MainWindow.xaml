@@ -107,7 +107,7 @@
                 <MenuItem x:Name="MniDetails" Header="Details" Checked="DetailsItem_CheckedChanged" Unchecked="DetailsItem_CheckedChanged" IsChecked="True" IsCheckable="True"></MenuItem>
                 <MenuItem x:Name="MniLockedPath" Header="Locked path" Checked="MniLockedPath_CheckChanged" Unchecked="MniLockedPath_CheckChanged" IsChecked="True" IsCheckable="True"></MenuItem>
                 <Separator></Separator>
-                <MenuItem Header="Refresh" Click="RefreshMenuItem_Click">
+                <MenuItem Header="Refresh layout" Click="RefreshMenuItem_Click">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/DeadLock;component/Resources/restart.png"></Image>
                     </MenuItem.Icon>
@@ -213,7 +213,7 @@
                             <Image Width="16" Height="16" Source="/DeadLock;component/Resources/details.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Properties">
+                    <MenuItem Header="Properties" Click="FilePropertiesMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/DeadLock;component/Resources/details.png" />
                         </MenuItem.Icon>
@@ -275,7 +275,7 @@
                             <Image Width="16" Height="16" Source="/DeadLock;component/Resources/virustotal.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Properties">
+                    <MenuItem Header="Properties" Click="DetailPropertiesMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/DeadLock;component/Resources/details.png" />
                         </MenuItem.Icon>

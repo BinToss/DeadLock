@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Forms;
 using DeadLock.Classes.GUI;
 using DeadLock.Classes.Locker;
+using DeadLock.Classes.Native;
 using DeadLock.Classes.Utils;
 using Application = System.Windows.Application;
 using DataFormats = System.Windows.DataFormats;
@@ -283,7 +284,7 @@ namespace DeadLock.Windows
 
         private async void LsvFiles_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            if (!(((FrameworkElement) e.OriginalSource).DataContext is QuestionablePath item)) return;
+            if (!(((FrameworkElement)e.OriginalSource).DataContext is QuestionablePath item)) return;
             item.HasOwnership();
 
             List<HandleLocker> details = await item.GetHandleLockers();
@@ -314,12 +315,12 @@ namespace DeadLock.Windows
 
         private void FileVirusTotalMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            QuestionablePath selectedPath = (QuestionablePath)LsvFiles.SelectedItem;
-            if (selectedPath == null) return;
-
             try
             {
-                VirusTotal.OpenInVirusTotal(selectedPath.ActualPath);
+                foreach (QuestionablePath qp in LsvFiles.SelectedItems)
+                {
+                    VirusTotal.OpenInVirusTotal(qp.ActualPath);
+                }
             }
             catch (Exception ex)
             {
@@ -329,12 +330,42 @@ namespace DeadLock.Windows
 
         private void DetailVirusTotalMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            HandleLocker selectedPath = (HandleLocker)LsvDetails.SelectedItem;
-            if (selectedPath == null) return;
-
             try
             {
-                VirusTotal.OpenInVirusTotal(selectedPath.FilePath);
+                foreach (HandleLocker hl in LsvDetails.SelectedItems)
+                {
+                    VirusTotal.OpenInVirusTotal(hl.FilePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "DeadLock", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void FilePropertiesMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                foreach (QuestionablePath qp in LsvFiles.SelectedItems)
+                {
+                    NativeMethods.ShowFileProperties(qp.ActualPath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "DeadLock", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DetailPropertiesMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                foreach (HandleLocker hl in LsvDetails.SelectedItems)
+                {
+                    NativeMethods.ShowFileProperties(hl.FilePath);
+                }
             }
             catch (Exception ex)
             {
