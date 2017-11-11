@@ -162,15 +162,8 @@ namespace DeadLock.Classes.Locker
         /// <returns>A list of HandleLocker objects that are currently locking the file or folder</returns>
         internal async Task<List<HandleLocker>> GetHandleLockers()
         {
-            List<HandleLocker> handleLockers;
-            if (File.GetAttributes(ActualPath).HasFlag(FileAttributes.Directory))
-            {
-                handleLockers = await GetDirectoryLockers();
-            }
-            else
-            {
-                handleLockers = await GetFileLockers();
-            }
+            Status = "Loading";
+            List<HandleLocker> handleLockers = File.GetAttributes(ActualPath).HasFlag(FileAttributes.Directory) ? await GetDirectoryLockers() : await GetFileLockers();
 
             if (handleLockers == null || handleLockers.Count == 0)
             {

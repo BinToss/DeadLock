@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security.Principal;
 using System.Windows;
@@ -230,13 +231,7 @@ namespace DeadLock.Windows
         /// <param name="path">The path of the file or folder that should be added to the GUI</param>
         private void AddPath(string path)
         {
-            bool already = false;
-            foreach (QuestionablePath hl in LsvFiles.Items)
-            {
-                if (hl.ActualPath != path) continue;
-                already = true;
-                break;
-            }
+            bool already = LsvFiles.Items.Cast<QuestionablePath>().Any(hl => hl.ActualPath == path);
 
             if (already) return;
             {
@@ -271,14 +266,11 @@ namespace DeadLock.Windows
             if (fbd.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
             try
             {
-                foreach (string s in Directory.GetFiles(fbd.SelectedPath, "*.*", SearchOption.AllDirectories))
-                {
-                    AddPath(s);
-                }
+                AddPath(fbd.SelectedPath);
             }
             catch (Exception)
             {
-                MessageBox.Show("Unable to open all files in the directory! Please make sure that you have the appropriate rights to access this folder.", "DeadLock", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Unable to open the path! Please make sure that you have the appropriate rights to access this folder.", "DeadLock", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
