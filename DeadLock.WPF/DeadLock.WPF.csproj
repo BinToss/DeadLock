@@ -4,14 +4,14 @@
     <TargetFrameworks>net462; net6.0-windows</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <RootNamespace>DeadLock</RootNamespace>
-    <AssemblyName>DeadLock</AssemblyName>
+    <AssemblyName>DeadLock.WPF</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>DeadLock_WPF.App</StartupObject>
+    <StartupObject>DeadLock.WPF.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Paomedia-Small-N-Flat-Lock.ico</ApplicationIcon>
@@ -23,9 +23,6 @@
     <Reference Include="UpdateManager">
       <HintPath>..\..\UpdateManager\UpdateManager\bin\Release\UpdateManager.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Paomedia-Small-N-Flat-Lock.ico" />
