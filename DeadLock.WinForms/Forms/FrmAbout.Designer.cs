@@ -3,9 +3,9 @@
 // Use of this code is subject to the terms of our license.
 // A copy of the current license can be obtained at any time by e-mailing
 // licensing@syncfusion.com. Any infringement will be prosecuted under
-// applicable laws. 
+// applicable laws.
 #endregion
-namespace DeadLock.Forms
+namespace DeadLock.WinForms.Forms
 {
     partial class FrmAbout
     {
@@ -49,9 +49,9 @@ namespace DeadLock.Forms
             this.pnlImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // pnlAbout
-            // 
+            //
             this.pnlAbout.Controls.Add(this.txtAbout);
             this.pnlAbout.Controls.Add(this.pnlImage);
             this.pnlAbout.Dock = System.Windows.Forms.DockStyle.Top;
@@ -59,9 +59,9 @@ namespace DeadLock.Forms
             this.pnlAbout.Name = "pnlAbout";
             this.pnlAbout.Size = new System.Drawing.Size(343, 139);
             this.pnlAbout.TabIndex = 1;
-            // 
+            //
             // txtAbout
-            // 
+            //
             this.txtAbout.BeforeTouchSize = new System.Drawing.Size(243, 139);
             this.txtAbout.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtAbout.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -75,18 +75,18 @@ namespace DeadLock.Forms
             this.txtAbout.Style = Syncfusion.Windows.Forms.Tools.TextBoxExt.theme.Default;
             this.txtAbout.TabIndex = 1;
             this.txtAbout.TabStop = false;
-            // 
+            //
             // pnlImage
-            // 
+            //
             this.pnlImage.Controls.Add(this.picLogo);
             this.pnlImage.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlImage.Location = new System.Drawing.Point(0, 0);
             this.pnlImage.Name = "pnlImage";
             this.pnlImage.Size = new System.Drawing.Size(100, 139);
             this.pnlImage.TabIndex = 0;
-            // 
+            //
             // picLogo
-            // 
+            //
             this.picLogo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picLogo.Image = global::DeadLock.Properties.Resources._lock;
             this.picLogo.Location = new System.Drawing.Point(0, 0);
@@ -95,9 +95,9 @@ namespace DeadLock.Forms
             this.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picLogo.TabIndex = 0;
             this.picLogo.TabStop = false;
-            // 
+            //
             // btnClose
-            // 
+            //
             this.btnClose.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
             this.btnClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.btnClose.BeforeTouchSize = new System.Drawing.Size(75, 23);
@@ -113,9 +113,9 @@ namespace DeadLock.Forms
             this.btnClose.UseVisualStyle = true;
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
+            //
             // btnLicense
-            // 
+            //
             this.btnLicense.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
             this.btnLicense.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.btnLicense.BeforeTouchSize = new System.Drawing.Size(75, 23);
@@ -130,9 +130,9 @@ namespace DeadLock.Forms
             this.btnLicense.UseVisualStyle = true;
             this.btnLicense.UseVisualStyleBackColor = false;
             this.btnLicense.Click += new System.EventHandler(this.btnLicense_Click);
-            // 
+            //
             // btnCodeDead
-            // 
+            //
             this.btnCodeDead.Appearance = Syncfusion.Windows.Forms.ButtonAppearance.Metro;
             this.btnCodeDead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.btnCodeDead.BeforeTouchSize = new System.Drawing.Size(75, 23);
@@ -146,9 +146,9 @@ namespace DeadLock.Forms
             this.btnCodeDead.Text = "CodeDead";
             this.btnCodeDead.UseVisualStyle = true;
             this.btnCodeDead.Click += new System.EventHandler(this.btnCodeDead_Click);
-            // 
+            //
             // FrmAbout
-            // 
+            //
             this.AcceptButton = this.btnCodeDead;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

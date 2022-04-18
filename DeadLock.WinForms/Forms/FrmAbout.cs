@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using DeadLock.Core;
 using Syncfusion.Windows.Forms;
 
-namespace DeadLock.Forms
+namespace DeadLock.WinForms.Forms
 {
     public partial class FrmAbout : MetroForm
     {

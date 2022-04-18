@@ -13,7 +13,7 @@ using DeadLock.Core;
 using Syncfusion.Windows.Forms;
 using FixedPanel = Syncfusion.Windows.Forms.Tools.Enums.FixedPanel;
 
-namespace DeadLock.Forms
+namespace DeadLock.WinForms.Forms
 {
     public partial class FrmMain : MetroForm
     {

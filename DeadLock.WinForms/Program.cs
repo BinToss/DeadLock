@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using DeadLock.Forms;
+using DeadLock.WinForms.Forms;
 using Syncfusion.Windows.Forms;
 
-namespace DeadLock
+namespace DeadLock.WinForms
 {
     internal static class Program
     {

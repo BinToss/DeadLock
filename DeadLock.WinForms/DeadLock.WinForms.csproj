@@ -9,7 +9,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>DeadLock.Program</StartupObject>
+    <StartupObject>DeadLock.WinForms.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Paomedia-Small-N-Flat-Lock.ico</ApplicationIcon>

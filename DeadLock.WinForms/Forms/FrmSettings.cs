@@ -6,7 +6,7 @@ using Microsoft.Win32;
 using Syncfusion.Windows.Forms;
 using Syncfusion.Windows.Forms.Tools;
 
-namespace DeadLock.Forms
+namespace DeadLock.WinForms.Forms
 {
     public partial class FrmSettings : MetroForm
     {
