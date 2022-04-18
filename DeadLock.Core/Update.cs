@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DeadLock.Classes
+namespace DeadLock.Core
 {
     /// <summary>
     /// Check whether a new version is available or not.

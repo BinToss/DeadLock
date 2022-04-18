@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
-using DeadLock.Classes;
+using DeadLock.Core;
 using Syncfusion.Windows.Forms;
 
 namespace DeadLock.Forms

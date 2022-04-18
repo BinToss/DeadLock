@@ -9,7 +9,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DeadLock.Classes;
+using DeadLock.Core;
 using Syncfusion.Windows.Forms;
 using FixedPanel = Syncfusion.Windows.Forms.Tools.Enums.FixedPanel;
 

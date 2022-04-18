@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Management;
 
-namespace DeadLock.Classes
+namespace DeadLock.Core
 {
     /// <summary>
     /// A collection of a Process, the filename of that process, the path of that process and the current Language.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace DeadLock.Classes
+namespace DeadLock.Core
 {
     /// <summary>
     /// Collection of native methods.

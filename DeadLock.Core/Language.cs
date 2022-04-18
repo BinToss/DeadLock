@@ -1,5 +1,5 @@
 ﻿// ReSharper disable UnassignedField.Global
-namespace DeadLock.Classes
+namespace DeadLock.Core
 {
     /// <summary>
     /// Collection of strings that represent the translation of DeadLock into a certain language.

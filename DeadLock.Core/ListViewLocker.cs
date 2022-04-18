@@ -15,7 +15,7 @@ using SearchOption = System.IO.SearchOption;
 
 // ReSharper disable PossibleMultipleEnumeration
 
-namespace DeadLock.Classes
+namespace DeadLock.Core
 {
     /// <summary>
     /// Represents the collection of a path, the ProcessLockers of that path and a CancellationTokenSource to cancel a task.
@@ -34,7 +34,7 @@ namespace DeadLock.Classes
         #endregion
 
         /// <summary>
-        /// Generate a new ListViewLocker. 
+        /// Generate a new ListViewLocker.
         /// </summary>
         /// <param name="path">The path to a file.</param>
         /// <param name="language">The current Language.</param>

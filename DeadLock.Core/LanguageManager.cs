@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using Syncfusion.Windows.Forms;
 
-namespace DeadLock.Classes
+namespace DeadLock.Core
 {
     /// <summary>
     /// The LanguageManager can be used to load or return a Language object.
