@@ -25,7 +25,7 @@ namespace DeadLock.Core
         #endregion
 
         #region Assigned_Variables
-        private readonly Version _version;
+        private readonly Version _currentVersion;
         #endregion
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace DeadLock.Core
         /// </summary>
         public Update()
         {
-            _version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            _currentVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
         }
 
         /// <summary>
@@ -42,8 +42,8 @@ namespace DeadLock.Core
         /// <returns>A boolean to represent whether there is an update available or not.</returns>
         internal bool CheckForUpdate()
         {
-            Version update = new Version(MajorVersion, MinorVersion, BuildVersion, RevisionVersion);
-            int result = update.CompareTo(_version);
+            Version latestVersion = new Version(MajorVersion, MinorVersion, BuildVersion, RevisionVersion);
+            int result = latestVersion.CompareTo(_currentVersion);
             return result > 0;
         }
 
