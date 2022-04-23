@@ -5,7 +5,9 @@
     <ImplicitUsings>false</ImplicitUsings>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="./Properties/Resources/Languages/**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
