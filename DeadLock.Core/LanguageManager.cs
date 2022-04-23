@@ -1,5 +1,8 @@
-﻿using System;
+using System;
 using System.IO;
+using System.Reflection;
+using System.Reflection.Metadata;
+using System.Resources;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using Syncfusion.Windows.Forms;
@@ -9,7 +12,7 @@ namespace DeadLock.Core
     /// <summary>
     /// The LanguageManager can be used to load or return a Language object.
     /// </summary>
-    internal class LanguageManager
+    public class LanguageManager
     {
         #region Variables
 
@@ -20,16 +23,23 @@ namespace DeadLock.Core
         /// <summary>
         /// Generate a new LanguageManager.
         /// </summary>
-        internal LanguageManager()
+        public LanguageManager()
         {
             _currentLanguage = new Language();
+        }
+
+        public LanguageManager(string path)
+        {
+            _currentLanguage = new Language();
+            LoadLanguage(path);
         }
 
         /// <summary>
         /// Load a custom language.
         /// </summary>
         /// <param name="path">Path to the XML language file.</param>
-        internal void LoadLanguage(string path)
+        /// TODO: exception documentation
+        public void LoadLanguage(string path)
         {
             try
             {
@@ -38,11 +48,12 @@ namespace DeadLock.Core
                 {
                     _currentLanguage = (Language)serializer.Deserialize(reader);
                 }
+
             }
             catch (Exception ex)
             {
-                MessageBoxAdv.Show(ex.Message, "DeadLock", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 LoadLanguage(1);
+                throw ex;
             }
         }
 
@@ -50,7 +61,7 @@ namespace DeadLock.Core
         /// Load a language using the Resources, depending on the index.
         /// </summary>
         /// <param name="index">The index of the language that should be loaded.</param>
-        internal void LoadLanguage(int index)
+        public void LoadLanguage(int index)
         {
             XmlSerializer serializer = new XmlSerializer(_currentLanguage.GetType());
             using (MemoryStream stream = new MemoryStream())
@@ -108,7 +119,7 @@ namespace DeadLock.Core
         /// Get the current language.
         /// </summary>
         /// <returns>The current language.</returns>
-        internal Language GetLanguage()
+        public Language GetLanguage()
         {
             return _currentLanguage;
         }
