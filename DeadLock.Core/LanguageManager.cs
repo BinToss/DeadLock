@@ -1,11 +1,5 @@
-using System;
-using System.IO;
-using System.Reflection;
-using System.Reflection.Metadata;
-using System.Resources;
-using System.Windows.Forms;
+﻿using System.IO;
 using System.Xml.Serialization;
-using Syncfusion.Windows.Forms;
 
 namespace DeadLock.Core
 {
@@ -48,12 +42,11 @@ namespace DeadLock.Core
                 {
                     _currentLanguage = (Language)serializer.Deserialize(reader);
                 }
-
             }
-            catch (Exception ex)
+            catch
             {
                 LoadLanguage(1);
-                throw ex;
+                throw;
             }
         }
 
@@ -63,6 +56,7 @@ namespace DeadLock.Core
         /// <param name="index">The index of the language that should be loaded.</param>
         public void LoadLanguage(int index)
         {
+            typeof(LanguageManager).Assembly.GetManifestResourceInfo(string.Empty);
             XmlSerializer serializer = new XmlSerializer(_currentLanguage.GetType());
             using (MemoryStream stream = new MemoryStream())
             {

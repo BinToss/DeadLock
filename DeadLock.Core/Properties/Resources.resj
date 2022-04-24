@@ -1,0 +1,17 @@
+{
+    "Strings": {},
+    "Files": {
+        "eng" : "Resources/Languages/eng.xml",
+        "ita" : "Resources/Languages/ita.xml",
+        "pl" : "Resources/Languages/pl.xml",
+        "nl" : "Resources/Languages/nl.xml",
+        "tr" : "Resources/Languages/tr.xml",
+        "fr" : "Resources/Languages/fr.xml",
+        "sr" : "Resources/Languages/sr.xml",
+        "kor" : "Resources/Languages/kor.xml",
+        "swe" : "Resources/Languages/swe.xml",
+        "ger" : "Resources/Languages/ger.xml",
+        "esp" : "Resources/Languages/esp.xml",
+        "rus" : "Resources/Languages/rus.xml"
+    }
+}

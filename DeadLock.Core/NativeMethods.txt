@@ -1,0 +1,9 @@
+K32GetModuleBaseNameW
+K32GetModuleFileNameExW
+K32GetProcessImageFileNameW
+QueryFullProcessImageName
+RmRegisterResources
+RmStartSession
+RmEndSession
+RmGetList
+ShellExecuteEx

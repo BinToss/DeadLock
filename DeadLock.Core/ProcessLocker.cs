@@ -1,8 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Management;
+using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
+using Windows.Win32;
+using Windows.Win32.Foundation;
 
 namespace DeadLock.Core
 {
@@ -58,20 +62,41 @@ namespace DeadLock.Core
         private static string GetMainModuleFilepath(int processId)
         {
             string filepath = "";
+
+            var currentProcess = Process.GetCurrentProcess();
+            if (processId == currentProcess.Id)
+                return currentProcess.MainModule.FileName;
+
             try
             {
-                string wmiQueryString = "SELECT ProcessId, ExecutablePath FROM Win32_Process WHERE ProcessId = " + processId;
-                using (ManagementObjectSearcher searcher = new ManagementObjectSearcher(wmiQueryString))
+                var process = Process.GetProcessById(processId);
+
+                try
                 {
-                    using (ManagementObjectCollection results = searcher.Get())
-                    {
-                        ManagementObject mo = results.Cast<ManagementObject>().FirstOrDefault();
-                        if (mo != null)
-                        {
-                            filepath = (string)mo["ExecutablePath"];
-                        }
-                    }
+                    return process.MainModule.FileName;
                 }
+                catch { }
+
+                try
+                {
+                    PWSTR exeName = new PWSTR();
+                    uint exeNameLength = uint.MaxValue;
+                    string exeNameReturn;
+
+                    if (!PInvoke.QueryFullProcessImageName(
+                        hProcess: process.SafeHandle,
+                        dwFlags: Windows.Win32.System.Threading.PROCESS_NAME_FORMAT.PROCESS_NAME_WIN32,
+                        lpExeName: exeName,
+                        lpdwSize: ref exeNameLength))
+                    {
+                        throw new Win32Exception(Marshal.GetLastWin32Error());
+                    }
+                    exeNameReturn = exeName.AsSpan().ToString();
+
+                    if (!string.IsNullOrWhiteSpace(exeNameReturn))
+                        filepath = exeNameReturn;
+                }
+                catch { }
             }
             catch (Win32Exception) { }
             return filepath;

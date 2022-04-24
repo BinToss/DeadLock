@@ -5,6 +5,7 @@ namespace DeadLock.Core
     /// <summary>
     /// Check whether a new version is available or not.
     /// </summary>
+    /// TODO:
     public class Update
     {
         #region XML_Update

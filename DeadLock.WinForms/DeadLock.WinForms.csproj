@@ -38,4 +38,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DeadLock.Core\DeadLock.Core.csproj" />
+  </ItemGroup>
 </Project>

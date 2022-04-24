@@ -1,15 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <ImplicitUsings>false</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="./Properties/Resources/Languages/**" />
+    <StaticResourceFolder Include="./Properties/Resources" />
+    <JsonResource Update="./Properties/Resources.resj">
+      <AccessModifier>Public</AccessModifier>
+      <Namespace>DeadLock.Core.Properties</Namespace>
+    </JsonResource>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.1.635-beta">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Sylvan.BuildTools.Resources" Version="0.6.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
   </ItemGroup>
 

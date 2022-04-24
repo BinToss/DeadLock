@@ -8,9 +8,6 @@ using System.Security.AccessControl;
 using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using Microsoft.VisualBasic.FileIO;
-using Syncfusion.Windows.Forms;
 using SearchOption = System.IO.SearchOption;
 
 // ReSharper disable PossibleMultipleEnumeration
@@ -20,7 +17,7 @@ namespace DeadLock.Core
     /// <summary>
     /// Represents the collection of a path, the ProcessLockers of that path and a CancellationTokenSource to cancel a task.
     /// </summary>
-    internal class ListViewLocker : ListViewItem
+    internal class ListViewLocker
     {
         #region Variables
         private readonly string _path;
@@ -31,6 +28,7 @@ namespace DeadLock.Core
         private bool _isRunning;
 
         private readonly Language _language;
+
         #endregion
 
         /// <summary>
@@ -41,9 +39,9 @@ namespace DeadLock.Core
         /// <param name="imageIndex">ListViewLocker image index.</param>
         internal ListViewLocker(string path, Language language, int imageIndex)
         {
-            Text = path;
-            UseItemStyleForSubItems = false;
-            ImageIndex = imageIndex;
+            //Text = path;
+            //UseItemStyleForSubItems = false;
+            _ = imageIndex;
 
             _path = path;
             _lockers = new List<ProcessLocker>();
@@ -160,7 +158,7 @@ namespace DeadLock.Core
                     if (File.GetAttributes(GetPath()).HasFlag(FileAttributes.Directory))
                     {
                         DirectoryInfo info = new DirectoryInfo(GetPath());
-                        WindowsIdentity self = WindowsIdentity.GetCurrent();
+                        System.Security.Principal.WindowsIdentity self = WindowsIdentity.GetCurrent();
                         DirectorySecurity ds = info.GetAccessControl();
                         ds.SetAccessRuleProtection(false, true);
                         if (self.User == null) return;
@@ -360,12 +358,9 @@ namespace DeadLock.Core
 
             try
             {
-                if (Properties.Settings.Default.TakeOwnership)
+                if (Properties.Settings.Default.TakeOwnership && !HasOwnership())
                 {
-                    if (!HasOwnership())
-                    {
-                        SetOwnership(true);
-                    }
+                    SetOwnership(true);
                 }
                 List<ProcessLocker> lockers = await GetLockerDetails();
                 await Task.Run(() =>
@@ -446,7 +441,7 @@ namespace DeadLock.Core
                         {
                             string sourcePath = GetPath().TrimEnd('\\', ' ');
                             string targetPath = fbd.SelectedPath.TrimEnd('\\', ' ');
-                            IEnumerable<IGrouping<string, string>> files = Directory.EnumerateFiles(sourcePath, "*", SearchOption.AllDirectories).GroupBy(Path.GetDirectoryName);
+                            IEnumerable<IGrouping<string, string>> files = Directory.EnumerateFiles(sourcePath, "*", SearchOption.AllDirectories).GroupBy(System.IO.Path.GetDirectoryName);
                             foreach (IGrouping<string, string> folder in files)
                             {
                                 GetCancellationToken().ThrowIfCancellationRequested();
@@ -455,9 +450,9 @@ namespace DeadLock.Core
                                 foreach (string file in folder)
                                 {
                                     GetCancellationToken().ThrowIfCancellationRequested();
-                                    string fileName = Path.GetFileName(file);
+                                    string fileName = System.IO.Path.GetFileName(file);
                                     if (fileName == null) continue;
-                                    string targetFile = Path.Combine(targetFolder, fileName);
+                                    string targetFile = System.IO.Path.Combine(targetFolder, fileName);
                                     if (File.Exists(targetFile))
                                     {
                                         File.Delete(targetFile);
@@ -477,7 +472,7 @@ namespace DeadLock.Core
             {
                 if (File.Exists(GetPath()))
                 {
-                    SaveFileDialog sfd = new SaveFileDialog { Filter = @"|*" + Path.GetExtension(GetPath()) };
+                    SaveFileDialog sfd = new SaveFileDialog { Filter = @"|*" + System.IO.Path.GetExtension(GetPath()) };
                     if (sfd.ShowDialog() == DialogResult.OK)
                     {
                         await Unlock();
@@ -514,7 +509,7 @@ namespace DeadLock.Core
             }
             else
             {
-                SaveFileDialog sfd = new SaveFileDialog { Filter = @"|*" + Path.GetExtension(GetPath()) };
+                SaveFileDialog sfd = new SaveFileDialog { Filter = @"|*" + System.IO.Path.GetExtension(GetPath()) };
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
                     await Unlock();
